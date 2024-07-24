@@ -24,5 +24,13 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    
+    path('cadastro/', views.cadastro, name='cadastro'),
+    path('editarusuario/<int:id>', views.editarusuario, name='editarusuario'),
+    path('excluirusuario/int:id>/', views.excluirusuario, name='excluirusuario'),
+    
+    path('pedido/', views.pedido, name='pedido'),
+    path('sobre', views.sobre, name='sobre'),
+    path('')
 ]
 

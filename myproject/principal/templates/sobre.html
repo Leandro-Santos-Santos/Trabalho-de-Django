@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+{%block titulo%}
+O que é Django?
+{%endblock%}
+{% block conteudo%}
+    <title></title>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}static/style.css">
+    <h1>O que é Django?</h1>
+
+    <p>Django é um framework web de alto nível escrito em Python, conhecido por seu desenvolvimento rápido, design pragmático e limpo.</p>
+
+    <h2>Benefícios do Django:</h2>
+    <h3>Fácil de usar</h3>
+
+    Django possui uma sintaxe amigável e intuitiva, tornando-o ideal para iniciantes e experientes em Python. Sua arquitetura Model-View-Template (MTV) promove um fluxo de desenvolvimento claro e organizado.
+
+    <h3>Rápido e simples</h3>
+    Django agiliza o processo de desenvolvimento web, fornecendo diversos componentes prontos para uso, como autenticação, gerenciamento de banco de dados e administração de sites. Isso permite que você construa sites e aplicativos web complexos com menos tempo e esforço.
+    <h3>Ampla documentação e comunidade</h3>
+    Django conta com extensa documentação oficial e uma comunidade vibrante de desenvolvedores. Isso garante que você sempre encontre ajuda e suporte quando precisar.
+    <h3>Design focado no uso</h3>
+    Django é projetado com foco na usabilidade e na experiência do desenvolvedor. Isso significa que você pode escrever código limpo, legível e fácil de manter.
+    <h3>Batteries included</h3>
+    Django vem com diversas funcionalidades integradas, como autenticação de usuários, gerenciamento de sessões, formulários web e um sistema de administração de sites completo. Isso reduz a necessidade de bibliotecas externas e simplifica o desenvolvimento.
+    <h3>Seguro</h3>  
+    Django leva a segurança a sério e ajuda os desenvolvedores a evitar erros comuns de segurança. Ele fornece recursos integrados para proteger seus aplicativos contra ataques como cross-site scripting (XSS) e cross-site request forgery (CSRF). 
+    <h3>Escalável</h3>   
+    Django é altamente escalável e pode ser usado para construir sites e aplicativos que lidam com grandes volumes de tráfego. Diversos sites populares, como Instagram, Disqus e Mozilla, são construídos com Django. 
+    <h3>Flexível</h3>
+    Django é um framework flexível que pode ser adaptado para atender às suas necessidades específicas. Você pode facilmente estender o Django com plugins e bibliotecas personalizadas.  
+    <h3>Documentação Oficial</h3>
+    <a href="https://docs.djangoproject.com/pt-br/5.0/" target="_blank">Documentação Django:</a> A documentação oficial do Django é abrangente e detalhada, cobrindo tudo desde a instalação até tópicos avançados.
+ 
+
+   
+</body>
+<img src="{% static 'django.gif' %}" alt="">
+{%endblock%}
