@@ -1,0 +1,11 @@
+<h1>Formulário de Contato</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <!-- Esta tag Django insere um token de segurança CSRF (Cross-Site Request Forgery) no formulário.
+O token CSRF ajuda a proteger o formulário contra ataques de CSRF, que podem ser usados para enviar dados não autorizados para o servidor. -->
+  {{ form.as_p }}
+  <!-- Esta tag Django gera o markup HTML para todos os campos do formulário definidos na classe do formulário Django.
+A tag {{ form.as_p }} usa o método as_p da classe do formulário para gerar o HTML em formato de parágrafos (<p>). -->
+  <button type="submit">Enviar</button>
+</form>

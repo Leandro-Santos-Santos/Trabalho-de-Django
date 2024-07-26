@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="pt-br">
+  
+<head>
+   
+ 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body style="text-align: center;font-size: 25px;font-family: Segoe UI;">
+    <div>
+        <img class="imgpython"  src="{% static 'giphy.gif' %}" alt="">
+       
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Sistema de chamados Django</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <input class="inputlogin" type="text" name="username" placeholder="Email">
+            </div>
+            <div>
+                <input style="margin: 10px" class="inputlogin" type="password" name="password" placeholder="Senha">
+            </div>
+
+            <button type="submit" class="botaologin">Entrar</button>
+            <div style="margin: 10px">
+              
+           
+        </form>
+        <a class="botao" href="/contato">Contato</a>
+        
+        <div style="margin: 10px">
+    </div>
+    
+</body>
+</html>

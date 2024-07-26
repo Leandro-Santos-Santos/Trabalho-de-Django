@@ -31,6 +31,10 @@ urlpatterns = [
     
     path('pedido/', views.pedido, name='pedido'),
     path('sobre', views.sobre, name='sobre'),
-    path('')
+    path('contato/', views.contato, name='contato'),
+    path('login/', views.login, name='login')
 ]
 
+if settings.DEBUG:
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()
