@@ -4,13 +4,20 @@ Página inicial
 {%endblock%}
 {% block conteudo%}
 {% load static %}
-<h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Bem vindo</h2>
+<body style="background-color: black;">
+<h2 style="text-align: center; font-size: 25px; font-family: Segoe UI; color: white;">Bem vindo</h2>
     <!--Cria um título de nível 2-->
     <hr>
     <!--Cria uma linha horizontal.-->
     
     <div class="divimg">
-      <img class="imgpython"  src="{% static 'giphy.gif' %}" alt="">
+      <img class="imgpython"  src="{% static 'hamburguer1.jpg' %}" alt="">
         <!--Cria uma imagem.-->
       </div>
+
+<footer style="background-color: #292c37; color: white; text-align: center; padding: 10px 0; position: fixed; width: 100%; bottom: 0;">
+    <p>&copy; 2024 Meu Site. Todos os direitos reservados.</p>
+</footer>
+
+</body>
 {%endblock%}

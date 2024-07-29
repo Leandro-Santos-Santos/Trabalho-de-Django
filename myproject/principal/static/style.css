@@ -1,0 +1,23 @@
+body{
+    background-color: black;
+}
+
+footer{
+    background-color: #292c37;
+}
+
+.divimg {
+    text-align: center;
+    margin: 120px 0; /* Adicionado margem para separação */
+}
+
+/*.imgpython {
+    width: 100px;
+    height: 150px;
+    display: inline-block; /* Garante que a imagem seja um bloco inline */
+
+
+.imgdjango{
+    width: 50%;
+    height: 50%;
+}

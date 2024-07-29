@@ -26,13 +26,17 @@ urlpatterns = [
     path('', views.index, name='index'),
     
     path('cadastro/', views.cadastro, name='cadastro'),
+    path('usuarios/', views.usuarios, name='usuarios'),
     path('editarusuario/<int:id>', views.editarusuario, name='editarusuario'),
     path('excluirusuario/int:id>/', views.excluirusuario, name='excluirusuario'),
     
     path('pedido/', views.pedido, name='pedido'),
     path('sobre', views.sobre, name='sobre'),
     path('contato/', views.contato, name='contato'),
-    path('login/', views.login, name='login')
+    path('login/', views.login, name='login'),
+    path('contatos/', views.contatos, name='contatos'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('atendimento/<int:id>/',views.atenderchamado, name='atendimento_detail'),
 ]
 
 if settings.DEBUG:

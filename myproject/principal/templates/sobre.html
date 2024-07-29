@@ -8,34 +8,37 @@ O que é Django?
 <body>
     {% load static %}
     <link rel="stylesheet" href="{{ STATIC_URL }}static/style.css">
-    <h1>O que é Django?</h1>
+    <main style="color: white;">
+    <h1>Nossa Hamburgueria</h1>
 
-    <p>Django é um framework web de alto nível escrito em Python, conhecido por seu desenvolvimento rápido, design pragmático e limpo.</p>
+    <p>Na [Nome da Hamburgueria], nossa missão é proporcionar uma experiência gastronômica única e saborosa. Desde [ano de fundação], temos nos dedicado a oferecer hambúrgueres artesanais de alta qualidade, preparados com os melhores ingredientes frescos e selecionados.</p>
 
-    <h2>Benefícios do Django:</h2>
-    <h3>Fácil de usar</h3>
+    <h2>O que nos diferencia?</h2>
+    
+    <div class="divimg">
+        <img class="imgpython"  src="{% static 'hamburguer3.jpg' %}" alt=""> 
 
-    Django possui uma sintaxe amigável e intuitiva, tornando-o ideal para iniciantes e experientes em Python. Sua arquitetura Model-View-Template (MTV) promove um fluxo de desenvolvimento claro e organizado.
+    <h3>Ingredientes Frescos e de Qualidade:</h3>
+    Nossos hambúrgueres são feitos com carne 100% bovina, sem conservantes, e ingredientes frescos, garantindo sabor e qualidade em cada mordida.
 
-    <h3>Rápido e simples</h3>
-    Django agiliza o processo de desenvolvimento web, fornecendo diversos componentes prontos para uso, como autenticação, gerenciamento de banco de dados e administração de sites. Isso permite que você construa sites e aplicativos web complexos com menos tempo e esforço.
-    <h3>Ampla documentação e comunidade</h3>
-    Django conta com extensa documentação oficial e uma comunidade vibrante de desenvolvedores. Isso garante que você sempre encontre ajuda e suporte quando precisar.
-    <h3>Design focado no uso</h3>
-    Django é projetado com foco na usabilidade e na experiência do desenvolvedor. Isso significa que você pode escrever código limpo, legível e fácil de manter.
-    <h3>Batteries included</h3>
-    Django vem com diversas funcionalidades integradas, como autenticação de usuários, gerenciamento de sessões, formulários web e um sistema de administração de sites completo. Isso reduz a necessidade de bibliotecas externas e simplifica o desenvolvimento.
-    <h3>Seguro</h3>  
-    Django leva a segurança a sério e ajuda os desenvolvedores a evitar erros comuns de segurança. Ele fornece recursos integrados para proteger seus aplicativos contra ataques como cross-site scripting (XSS) e cross-site request forgery (CSRF). 
-    <h3>Escalável</h3>   
-    Django é altamente escalável e pode ser usado para construir sites e aplicativos que lidam com grandes volumes de tráfego. Diversos sites populares, como Instagram, Disqus e Mozilla, são construídos com Django. 
-    <h3>Flexível</h3>
-    Django é um framework flexível que pode ser adaptado para atender às suas necessidades específicas. Você pode facilmente estender o Django com plugins e bibliotecas personalizadas.  
-    <h3>Documentação Oficial</h3>
-    <a href="https://docs.djangoproject.com/pt-br/5.0/" target="_blank">Documentação Django:</a> A documentação oficial do Django é abrangente e detalhada, cobrindo tudo desde a instalação até tópicos avançados.
- 
+    <h3>Receitas Exclusivas:</h3>
+    Cada receita é cuidadosamente desenvolvida pelo nosso chef, combinando sabores tradicionais com toques inovadores, para oferecer uma experiência única.
+    
+    <h3>Ambiente Acolhedor:</h3>
+    Nossa hamburgueria é projetada para ser um lugar onde você se sinta em casa. Um espaço acolhedor e descontraído, perfeito para reunir amigos e família.
 
-   
+    <h3>Opções para Todos os Gostos:</h3>
+    Além dos clássicos hambúrgueres de carne, oferecemos opções vegetarianas, veganas e sem glúten, para que todos possam desfrutar.
+    <h3>Atendimento de Qualidade:</h3>
+    Nossa equipe é treinada para oferecer um atendimento cordial e eficiente, garantindo que sua experiência seja sempre a melhor possível.
+    <h2>Venha nos visitar!</h2>  
+    <p>Estamos localizados em [endereço], abertos de [dias e horários de funcionamento]. Esperamos por você para uma experiência gastronômica inesquecível. Siga-nos nas redes sociais para ficar por dentro das novidades e promoções exclusivas.</p>
+    </main>
+     
+    <footer style="background-color: #292c37; color: white; text-align: center; padding: 10px 0; position: fixed; width: 100%; bottom: 0;">
+        <p>&copy; 2024 Meu Site. Todos os direitos reservados.</p>
+    </footer>
+
 </body>
-<img src="{% static 'django.gif' %}" alt="">
+
 {%endblock%}

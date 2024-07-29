@@ -14,24 +14,11 @@ from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 
-
-def index(request):
-     return render(request, 'index.html')
-# Create your views here.
-
-
-
-def sobre(request):
-     return render(request, 'sobre.html')
-
-
-def login(request):
-     return render(request, 'login.html')
-
+from .forms import PedidoForm
 
 def pedido(request):
     if request.method == 'POST':
-        form = ContatoForm(request.POST)
+        form = PedidoForm(request.POST)
         if form.is_valid():
             try:
                 # Estabelecer conexão com o banco de dados
@@ -40,9 +27,10 @@ def pedido(request):
                 # Preparar consulta SQL e valores
                 nome = form.cleaned_data['nome']
                 email = form.cleaned_data['email']
-                mensagem = form.cleaned_data['mensagem']
-                sql = "INSERT INTO contatos (nome, email, mensagem) VALUES (%s, %s, %s)"
-                values = (nome, email, mensagem)
+                tipo_hamburguer = form.cleaned_data['tipo_hamburguer']
+                valor_total = form.cleaned_data['valor_total']
+                sql = "INSERT INTO pedido (nome, email, tipo_hamburguer, valor_total) VALUES (%s, %s, %s, %s)"
+                values = (nome, email, tipo_hamburguer, valor_total)
 
                 # Executar consulta SQL e confirmar alterações
                 cursor = oracle.cursor()
@@ -57,7 +45,7 @@ def pedido(request):
                 # Manipular erros de banco de dados
                 print(f"Erro ao salvar dados no banco de dados: {err}")
                 mensagem_erro = "Ocorreu um erro ao processar o seu contato. Tente novamente mais tarde."
-                return render(request, 'erro.html', mensagem_erro=mensagem_erro), 500
+                return render(request, 'erro.html', {'mensagem_erro': mensagem_erro})
 
             finally:
                 # Fechar conexão com o banco de dados se estiver aberta
@@ -70,8 +58,119 @@ def pedido(request):
 
     else:
         # Renderizar formulário vazio
-        form = ContatoForm()
+        form = PedidoForm()
         return render(request, 'pedido.html', {'form': form})
+
+    
+
+def index(request):
+     return render(request, 'index.html')
+# Create your views here.
+
+
+def contatos(request):
+     if not request.session.get('usuario_id'):
+            return redirect('login')
+     else:
+        oracle = conecta_no_banco_de_dados()
+        cursor = oracle.cursor()
+        cursor.execute('SELECT * FROM contatos where situacao!="Atendimento" AND situacao!="Finalizado";')
+        contatos = cursor.fetchall()
+        
+        # Renderize o template HTML com os contatos recuperados
+        return render(request, 'contatos.html', {"contatos": contatos})
+
+
+def sobre(request):
+     return render(request, 'sobre.html')
+
+def login(request):
+    request.session['usuario_id'] =""
+    try:
+        # Tentar estabelecer conexão com o banco de dados (dentro do bloco POST)
+        if request.method == 'POST':
+            oracle = conecta_no_banco_de_dados()
+
+            # Extrair credenciais do usuário do formulário enviado
+            email = request.POST['username']
+            senha = request.POST['password']
+            # usuario1 = authenticate(username=request.POST['username'], password=request.POST['password'])
+             # Validar as credenciais
+            cursor = oracle.cursor()
+            cursor.execute("""
+                        SELECT *
+                        FROM usuarios
+                        WHERE email = %s AND senha = %s;
+                    """, (email, senha,))
+            usuario = cursor.fetchone()
+            cursor.close()
+            oracle.close()
+            if usuario:
+                request.session['usuario_id'] = usuario[0]  # Iniciar sessão do usuário
+                
+              
+                return redirect('paginainicial')                     
+            else:
+                print('Email ou senha inválidos.')
+                    # Autenticação falhou, exibir mensagem de erro
+                mensagem_erro = 'Email ou senha inválidos.'
+                return render(request, 'login.html', {'mensagem_erro': mensagem_erro})
+             
+
+        else:
+            # Se não for uma solicitação POST, renderizar o formulário de login
+            return render(request, 'login.html')
+
+    except Exception as e:
+        # Se ocorrer um erro de conexão, exibir mensagem de erro
+        mensagem_erro = f"Erro ao conectar ao banco de dados: {e}"
+        return render(request, 'login.html', {'mensagem_erro': mensagem_erro})
+
+
+
+#def pedido(request):
+#    if request.method == 'POST':
+#        form = ContatoForm(request.POST)
+#        if form.is_valid():
+#            try:
+                # Estabelecer conexão com o banco de dados
+#                oracle = conecta_no_banco_de_dados()
+
+                # Preparar consulta SQL e valores
+#                nome = form.cleaned_data['nome']
+#                email = form.cleaned_data['email']
+#                mensagem = form.cleaned_data['mensagem']
+#                sql = "INSERT INTO contatos (nome, email, mensagem) VALUES (%s, %s, %s)"
+#                values = (nome, email, mensagem)
+
+                # Executar consulta SQL e confirmar alterações
+#                cursor = oracle.cursor()
+#                cursor.execute(sql, values)
+#                oracle.commit()
+
+                # Mensagem de sucesso e redirecionamento
+#                print(f"Dados do formulário salvos com sucesso!")
+#                return HttpResponseRedirect('/')
+
+#            except Exception as err:
+                # Manipular erros de banco de dados
+#                print(f"Erro ao salvar dados no banco de dados: {err}")
+#                mensagem_erro = "Ocorreu um erro ao processar o seu contato. Tente novamente mais tarde."
+#                return render(request, 'erro.html', mensagem_erro=mensagem_erro), 500
+
+#            finally:
+                # Fechar conexão com o banco de dados se estiver aberta
+#                if oracle is not None:
+#                    oracle.close()
+
+#        else:
+            # Manipular dados de formulário inválidos
+#            return render(request, 'pedido.html', {'form': form})
+
+#    else:
+        # Renderizar formulário vazio
+ #       form = ContatoForm()
+#        return render(request, 'pedido.html', {'form': form})
 
 
 def cadastro(request):
@@ -102,7 +201,7 @@ def cadastro(request):
             oracle.close()
 
             # Redirecione para a página de sucesso ou exiba a mensagem de confirmação
-            return redirect('paginainicial')     
+            return redirect('index')     
 
         # Exiba o formulário (assumindo lógica de renderização)
         return render(request, 'cadastro.html') 
@@ -152,6 +251,53 @@ def contato(request):
         form = ContatoForm()
         return render(request, 'contato.html', {'form': form})
    
+def usuarios(request):
+    if not request.session.get('usuario_id'):
+            return redirect('login')
+    else:
+        oracle = conecta_no_banco_de_dados()
+        cursor = oracle.cursor()
+        cursor.execute('SELECT * FROM usuarios;')
+        usuarios = cursor.fetchall()
+        
+        # Renderize o template HTML com os contatos recuperados
+        return render(request, 'usuarios.html', {"usuarios": usuarios})
+
+def atenderchamado(request, id):
+     if not request.session.get('usuario_id'):
+            return redirect('login')
+     else:
+        usuario_id = request.session['usuario_id']
+
+        try:
+            # Connect to the database
+            oracle = conecta_no_banco_de_dados()
+            cursor =  oracle.cursor()
+
+            # Update contato's status
+            sql = 'UPDATE contatos SET situacao = %s WHERE id_contato = %s;'
+            values = ("Atendimento", int(id))
+            cursor.execute(sql, values)
+
+            # Insert record into usuario_contato table
+            sql = """
+                INSERT INTO usuario_contato (usuario_id, contato_id, situacao)
+                VALUES (%s, %s, %s);
+            """
+            values = (int(usuario_id), int(id), "Atendimento")
+            cursor.execute(sql, values)
+
+            # Commit changes and close connection
+            oracle.commit()
+            oracle.close()
+
+            # Successful update
+            return redirect('/paginainicial')
+
+        except Exception as e:
+            # Handle errors
+            print(f"Erro ao atender chamado: {e}")
+            return redirect('/contatos')  
 
 def editarusuario(request,id):
     if not request.session.get('usuario_id'):

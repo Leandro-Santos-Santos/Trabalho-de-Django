@@ -37,10 +37,11 @@ def conecta_no_banco_de_dados():
         user='root',
         password='',
         database='banco01'  # Especificar o banco de dados
-        )
+)
 
     
         cursor = hoc.cursor()
+
         cursor.execute('CREATE TABLE contatos (id_contato INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, mensagem TEXT NOT NULL,situacao varchar (50) NOT NULL);')
 
         cursor.execute('CREATE TABLE usuarios (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(255), email VARCHAR(255), senha VARCHAR(255));')
