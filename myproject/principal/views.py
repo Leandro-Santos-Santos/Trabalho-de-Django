@@ -29,7 +29,7 @@ def pedido(request):
                 email = form.cleaned_data['email']
                 tipo_hamburguer = form.cleaned_data['tipo_hamburguer']
                 valor_total = form.cleaned_data['valor_total']
-                sql = "INSERT INTO pedido (nome, email, tipo_hamburguer, valor_total) VALUES (%s, %s, %s, %s)"
+                sql = "INSERT INTO pedidos (nome, email, tipo_hamburguer, valor_total) VALUES (%s, %s, %s, %s)"
                 values = (nome, email, tipo_hamburguer, valor_total)
 
                 # Executar consulta SQL e confirmar alterações
@@ -109,7 +109,7 @@ def login(request):
                 request.session['usuario_id'] = usuario[0]  # Iniciar sessão do usuário
                 
               
-                return redirect('paginainicial')                     
+                return redirect('index')                     
             else:
                 print('Email ou senha inválidos.')
                     # Autenticação falhou, exibir mensagem de erro

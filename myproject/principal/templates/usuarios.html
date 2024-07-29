@@ -4,25 +4,25 @@ Usuários TI
 {%endblock%}
 {% block conteudo%}
 {% load static %}
-    <h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Usuários</h2>
+    <h2 style="text-align: center; font-size: 25px; font-family: Segoe UI; color:white;">Usuários</h2>
    
     <table>
       <thead>
           <tr>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Ações</th>
+              <th style="color:white">Nome</th>
+              <th style="color:white">Email</th>
+              <th style="color:white">Ações</th>
           </tr>
       </thead>
 
       <tbody>
           {% for usuario in usuarios %}
               <tr>
-                  <td>{{ usuario.1 }}</td>
-                  <td>{{ usuario.2 }}</td>
+                  <td style="color:white">{{ usuario.1 }}</td>
+                  <td style="color:white">{{ usuario.2 }}</td>
                   <td>
-                    <a href="/excluirususario/{{ usuario.0}}" class="excluir" style="color: white;">Excluir</a>
-                    <a href="/editarusuario/{{ usuario.0}}" class="editar" style="color: white;">Editar</a>
+                    <a href="/excluirususario/{{ usuario.0}}" style="color: red;" class="excluir">Excluir</a>
+                    <a href="/editarusuario/{{ usuario.0}}" style="color:blue;" class="editar">Editar</a>
                   
                 </td>
               </tr>
@@ -32,5 +32,8 @@ Usuários TI
     <div class="divimg">
         <img class="imgpython"  src="{% static 'giphy.gif' %}" alt="">
               </div>
-            
+
+<footer style="background-color: #292c37; color: white; text-align: center; padding: 10px 0; position: fixed; width: 100%; bottom: 0;">
+    <p>&copy; 2024 Meu Site. Todos os direitos reservados.</p>
+</footer>
 {%endblock%}
