@@ -336,7 +336,7 @@ def editarusuario(request,id):
             oracle.close()
 
             # Redirecione para a página de sucesso ou exiba a mensagem de confirmação
-            return redirect('paginainicial')     
+            return redirect('index')     
 
         # Exiba o formulário (assumindo lógica de renderização)
         return render(request, 'editarusuario.html',{'id': id_usuario})
@@ -359,7 +359,7 @@ def excluirusuario(request,id):
             cursor.close()
 
             messages.success(request, 'Usuário excluído com sucesso!')
-            return redirect('paginainicial')
+            return redirect('index')
 
         except Exception as e:
             print(f"Erro ao excluir usuário: {e}")
